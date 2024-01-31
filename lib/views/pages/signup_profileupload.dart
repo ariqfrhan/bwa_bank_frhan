@@ -5,8 +5,9 @@ import 'package:bwa_bank_frhan/views/widgets/forms.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+
+class SignupProfileUpload extends StatelessWidget {
+  const SignupProfileUpload({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,28 +37,37 @@ class SignupScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20), color: whiteColor),
             child: Column(
               children: [
-                const CustomFormField(title: 'Fullname'),
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: lightBg,
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                          image: AssetImage('assets/ic_upload.png'))),
+                ),
                 const SizedBox(
                   height: 16,
                 ),
-                const CustomFormField(title: 'Email Address'),
+                Text(
+                  'Ariq Farhan',
+                  style: blackText.copyWith(fontSize: 18, fontWeight: medium),
+                ),
                 const SizedBox(
-                  height: 16,
+                  height: 30,
                 ),
                 const CustomFormField(
-                  title: 'Password',
+                  title: "Set PIN (6 digit number)",
                   obscureText: true,
-                ),
-                const SizedBox(
-                  height: 8,
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                 CustomFilledButton(
                   title: 'Continue',
-                  onPressed: (){
-                    Get.toNamed(Routes.signupUpload);
+                  onPressed: () {
+                    Get.toNamed(Routes.signupVerifyKtp);
                   },
                 )
               ],
@@ -67,7 +77,7 @@ class SignupScreen extends StatelessWidget {
             height: 20,
           ),
           TextButton(
-              onPressed: ()=> Get.toNamed(Routes.signin),
+              onPressed: () => Get.toNamed(Routes.signin),
               child: Text(
                 "Sign In",
                 style: greyText.copyWith(fontWeight: regular, fontSize: 16),

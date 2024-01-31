@@ -5,8 +5,8 @@ import 'package:bwa_bank_frhan/views/widgets/forms.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class SignupVerifyKtp extends StatelessWidget {
+  const SignupVerifyKtp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class SignupScreen extends StatelessWidget {
                     image: AssetImage('assets/logo_light.png'))),
           ),
           Text(
-            "Join Us to Unlock\nYour Growth",
+            "Verify Your\nAccount",
             style: blackText.copyWith(fontSize: 20, fontWeight: semibold),
           ),
           const SizedBox(
@@ -36,29 +36,32 @@ class SignupScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20), color: whiteColor),
             child: Column(
               children: [
-                const CustomFormField(title: 'Fullname'),
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: lightBg,
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                          image: AssetImage('assets/ic_upload.png'))),
+                ),
                 const SizedBox(
                   height: 16,
                 ),
-                const CustomFormField(title: 'Email Address'),
-                const SizedBox(
-                  height: 16,
-                ),
-                const CustomFormField(
-                  title: 'Password',
-                  obscureText: true,
+                Text(
+                  'Passport / ID Card',
+                  style: blackText.copyWith(fontSize: 18, fontWeight: medium),
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 30,
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                 CustomFilledButton(
                   title: 'Continue',
-                  onPressed: (){
-                    Get.toNamed(Routes.signupUpload);
-                  },
+                  onPressed: () {},
                 )
               ],
             ),
@@ -67,9 +70,9 @@ class SignupScreen extends StatelessWidget {
             height: 20,
           ),
           TextButton(
-              onPressed: ()=> Get.toNamed(Routes.signin),
+              onPressed: () => Get.toNamed(Routes.signupSuccess),
               child: Text(
-                "Sign In",
+                "Skip For Now",
                 style: greyText.copyWith(fontWeight: regular, fontSize: 16),
               ))
         ],

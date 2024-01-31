@@ -2,7 +2,10 @@
 
 import 'package:bwa_bank_frhan/views/pages/onboarding_screen.dart';
 import 'package:bwa_bank_frhan/views/pages/signin_screen.dart';
+import 'package:bwa_bank_frhan/views/pages/signup_profileupload.dart';
 import 'package:bwa_bank_frhan/views/pages/signup_screen.dart';
+import 'package:bwa_bank_frhan/views/pages/signup_success.dart';
+import 'package:bwa_bank_frhan/views/pages/signup_verifyktp.dart';
 import 'package:bwa_bank_frhan/views/pages/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +14,9 @@ class Routes{
   static String onboarding = '/onboarding';
   static String signin = '/sign-in';
   static String signup = '/sign-up';
+  static String signupUpload = '/sign-up-upload';
+  static String signupVerifyKtp = '/signup-verify-ktp';
+  static String signupSuccess = '/signup-success';
 
   static List<GetPage> routes = [
     GetPage(
@@ -28,6 +34,18 @@ class Routes{
     GetPage(
       name: signup, 
       page: () => const SignupScreen()
+    ),
+    GetPage(
+      name: signupUpload, 
+      page: () => const SignupProfileUpload()
+    ),
+    GetPage(
+      name: signupVerifyKtp, 
+      page: () => const SignupVerifyKtp()
+    ),
+    GetPage(
+      name: signupSuccess, 
+      page: () => const SignupSuccess()
     ),
 
   ];
