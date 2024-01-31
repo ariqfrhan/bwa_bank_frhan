@@ -1,3 +1,4 @@
+import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/views/widgets/profile_menu_item.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class ProfilePage extends StatelessWidget {
                 ProfileMenuItem(
                   icon: Icons.shield_outlined,
                   title: 'My PIN',
-                  onTap: () {},
+                  onTap: () => Get.toNamed(Routes.pin),
                 ),
                 ProfileMenuItem(
                   icon: Icons.wallet_outlined,
