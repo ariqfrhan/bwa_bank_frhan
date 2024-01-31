@@ -78,7 +78,7 @@ class ProfilePage extends StatelessWidget {
                   onTap: () async {
                     var data = await Get.toNamed(Routes.pin);
                     if (data == true) {
-                      Get.toNamed(Routes.profileEdit);
+                      Get.toNamed(Routes.pinEdit);
                     }
                   },
                 ),

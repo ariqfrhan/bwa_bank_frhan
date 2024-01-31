@@ -2,6 +2,8 @@
 
 import 'package:bwa_bank_frhan/views/pages/home_page.dart';
 import 'package:bwa_bank_frhan/views/pages/onboarding_screen.dart';
+import 'package:bwa_bank_frhan/views/pages/pin_edit_page.dart';
+import 'package:bwa_bank_frhan/views/pages/profile_edit_success.dart';
 import 'package:bwa_bank_frhan/views/pages/pin_page.dart';
 import 'package:bwa_bank_frhan/views/pages/profile_edit_page.dart';
 import 'package:bwa_bank_frhan/views/pages/profile_page.dart';
@@ -25,6 +27,8 @@ class Routes{
   static String profile = '/profile';
   static String pin = '/pin';
   static String profileEdit = '/profile-edit';
+  static String pinEdit = '/pin-edit';
+  static String profileSuccess = '/profile-success';
 
   static List<GetPage> routes = [
     GetPage(
@@ -70,6 +74,14 @@ class Routes{
     GetPage(
       name: profileEdit, 
       page: () => const ProfileEdit()
+    ),
+    GetPage(
+      name: pinEdit, 
+      page: () => const EditPinPage()
+    ),
+    GetPage(
+      name: profileSuccess, 
+      page: () => const ProfileEditSuccess()
     ),
 
   ];

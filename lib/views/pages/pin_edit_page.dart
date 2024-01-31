@@ -5,17 +5,16 @@ import 'package:bwa_bank_frhan/views/widgets/forms.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileEdit extends StatelessWidget {
-  const ProfileEdit({super.key});
+class EditPinPage extends StatelessWidget {
+  const EditPinPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-            onTap: () => Get.back(),
-            child: const Icon(Icons.arrow_back_ios_new)),
-        title: const Text('Edit Profile'),
+            onTap: () => Get.back(), child: Icon(Icons.arrow_back_ios_new)),
+        title: const Text('Edit PIN'),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -29,20 +28,15 @@ class ProfileEdit extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20), color: whiteColor),
             child: Column(
               children: [
-                const CustomFormField(title: 'Username'),
-                const SizedBox(
-                  height: 16,
+                const CustomFormField(
+                  title: 'Old PIN',
+                  obscureText: true,
                 ),
-                const CustomFormField(title: 'Fullname'),
-                const SizedBox(
-                  height: 16,
-                ),
-                const CustomFormField(title: 'Email Address'),
                 const SizedBox(
                   height: 16,
                 ),
                 const CustomFormField(
-                  title: 'Password',
+                  title: 'New PIN',
                   obscureText: true,
                 ),
                 const SizedBox(
@@ -52,9 +46,9 @@ class ProfileEdit extends StatelessWidget {
                   height: 30,
                 ),
                 CustomFilledButton(
-                  title: 'Update Now',
+                  title: 'Continue',
                   onPressed: () {
-                    Get.toNamed(Routes.profileSuccess);
+                    Get.offNamed(Routes.profile);
                   },
                 )
               ],
