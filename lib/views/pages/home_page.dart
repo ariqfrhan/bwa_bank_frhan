@@ -231,7 +231,7 @@ class Homepage extends StatelessWidget {
               HomeServicesItem(
                 iconUrl: 'assets/ic_topup.png',
                 title: 'Top Up',
-                onTap: () {},
+                onTap: () => Get.toNamed(Routes.topup),
               ),
               HomeServicesItem(
                 iconUrl: 'assets/ic_send.png',

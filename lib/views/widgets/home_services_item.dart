@@ -1,5 +1,6 @@
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class HomeServicesItem extends StatelessWidget {
   final String iconUrl;
@@ -13,15 +14,18 @@ class HomeServicesItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: 70,
-          height: 70,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20), color: whiteColor),
-          child: Center(
-            child: Image.asset(
-              iconUrl,
-              width: 26,
+        ZoomTapAnimation(
+          onTap: onTap,
+          child: Container(
+            width: 70,
+            height: 70,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), color: whiteColor),
+            child: Center(
+              child: Image.asset(
+                iconUrl,
+                width: 26,
+              ),
             ),
           ),
         ),
