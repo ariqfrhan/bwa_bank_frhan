@@ -1,5 +1,6 @@
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/views/pages/signin_screen.dart';
+import 'package:bwa_bank_frhan/views/widgets/buttons.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -90,28 +91,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   currentIndex == 2
                       ? Column(
                           children: [
-                            SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: purpleColor,
-                                    foregroundColor: whiteColor),
-                                child: Text(
-                                  "Get Started",
-                                  style: whiteText.copyWith(
-                                      fontSize: 16, fontWeight: semibold),
-                                ),
-                              ),
+                            CustomFilledButton(
+                              title: 'Get Started',
+                              onPressed: () {},
                             ),
-                            TextButton(onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const SigninScreen(),));
-                            }, 
-                            child: Text("Sign In", style: greyText.copyWith(
-                              fontSize: 16,
-                              fontWeight: semibold
-                            ),))
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SigninScreen(),
+                                      ));
+                                },
+                                child: Text(
+                                  "Sign In",
+                                  style: greyText.copyWith(
+                                      fontSize: 16, fontWeight: semibold),
+                                ))
                           ],
                         )
                       : Row(

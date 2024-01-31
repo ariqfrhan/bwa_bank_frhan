@@ -1,4 +1,5 @@
 import 'package:bwa_bank_frhan/shared/theme.dart';
+import 'package:bwa_bank_frhan/views/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -88,19 +89,9 @@ class SigninScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: purpleColor,
-                          foregroundColor: whiteColor),
-                      child: Text(
-                        'Sign In',
-                        style: whiteText.copyWith(
-                            fontWeight: semibold, fontSize: 16),
-                      )),
+                CustomFilledButton(
+                  title: 'Sign In',
+                  onPressed: () {},
                 )
               ],
             ),
