@@ -8,7 +8,7 @@ Color purpleColor = const Color(0xff5142E6);
 Color pinkColor = const Color(0xffFF2566);
 Color blueColor = const Color(0xff53C1F9);
 Color greenColor = const Color(0xff22B07D);
-Color lightBg = const Color(0xffE5E5E5);
+Color lightBg = const Color(0xffF6F8FB);
 Color darkBg = const Color(0xff020518);
 
 TextStyle blackText = GoogleFonts.poppins(
@@ -29,6 +29,10 @@ TextStyle blueText = GoogleFonts.poppins(
 
 TextStyle greenText = GoogleFonts.poppins(
   color: greenColor
+);
+
+TextStyle purpleText = GoogleFonts.poppins(
+  color: purpleColor
 );
 
 FontWeight light = FontWeight.w300;
