@@ -11,7 +11,6 @@ class SigninScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightBg,
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         children: [

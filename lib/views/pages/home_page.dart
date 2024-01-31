@@ -1,9 +1,12 @@
+import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/views/widgets/home_latesttransaction_item.dart';
 import 'package:bwa_bank_frhan/views/widgets/home_services_item.dart';
 import 'package:bwa_bank_frhan/views/widgets/home_tips_item.dart';
 import 'package:bwa_bank_frhan/views/widgets/home_useritem.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -11,7 +14,6 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightBg,
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         children: [
@@ -101,22 +103,25 @@ class Homepage extends StatelessWidget {
               )
             ],
           ),
-          Container(
-            width: 60,
-            height: 60,
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(image: AssetImage('assets/photo.png'))),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: greenColor,
-                      borderRadius: BorderRadius.circular(100)),
-                  child: Icon(
-                    Icons.check,
-                    color: whiteColor,
-                  )),
+          ZoomTapAnimation(
+            onTap: ()=>Get.toNamed(Routes.profile),
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(image: AssetImage('assets/photo.png'))),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: greenColor,
+                        borderRadius: BorderRadius.circular(100)),
+                    child: Icon(
+                      Icons.check,
+                      color: whiteColor,
+                    )),
+              ),
             ),
           )
         ],

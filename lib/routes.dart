@@ -2,6 +2,7 @@
 
 import 'package:bwa_bank_frhan/views/pages/home_page.dart';
 import 'package:bwa_bank_frhan/views/pages/onboarding_screen.dart';
+import 'package:bwa_bank_frhan/views/pages/profile_page.dart';
 import 'package:bwa_bank_frhan/views/pages/signin_screen.dart';
 import 'package:bwa_bank_frhan/views/pages/signup_profileupload.dart';
 import 'package:bwa_bank_frhan/views/pages/signup_screen.dart';
@@ -19,6 +20,7 @@ class Routes{
   static String signupVerifyKtp = '/signup-verify-ktp';
   static String signupSuccess = '/signup-success';
   static String homepage = '/home';
+  static String profile = '/profile';
 
   static List<GetPage> routes = [
     GetPage(
@@ -52,6 +54,10 @@ class Routes{
     GetPage(
       name: homepage, 
       page: () => const Homepage()
+    ),
+    GetPage(
+      name: profile, 
+      page: () => const ProfilePage()
     ),
 
   ];
