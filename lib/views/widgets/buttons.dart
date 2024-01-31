@@ -23,7 +23,7 @@ class CustomFilledButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         onPressed: () {
-          onPressed;
+          onPressed?.call();
         },
         style: ElevatedButton.styleFrom(
             backgroundColor: purpleColor, foregroundColor: whiteColor),

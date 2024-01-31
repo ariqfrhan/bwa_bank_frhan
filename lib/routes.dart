@@ -2,6 +2,7 @@
 
 import 'package:bwa_bank_frhan/views/pages/onboarding_screen.dart';
 import 'package:bwa_bank_frhan/views/pages/signin_screen.dart';
+import 'package:bwa_bank_frhan/views/pages/signup_screen.dart';
 import 'package:bwa_bank_frhan/views/pages/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,7 @@ class Routes{
   static String splash = '/';
   static String onboarding = '/onboarding';
   static String signin = '/sign-in';
+  static String signup = '/sign-up';
 
   static List<GetPage> routes = [
     GetPage(
@@ -22,6 +24,10 @@ class Routes{
     GetPage(
       name: signin, 
       page: () => const SigninScreen()
+    ),
+    GetPage(
+      name: signup, 
+      page: () => const SignupScreen()
     ),
 
   ];

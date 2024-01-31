@@ -1,6 +1,5 @@
 import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
-import 'package:bwa_bank_frhan/views/pages/signin_screen.dart';
 import 'package:bwa_bank_frhan/views/widgets/buttons.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +94,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: [
                             CustomFilledButton(
                               title: 'Get Started',
-                              onPressed: () {},
+                              onPressed: () => Get.toNamed(Routes.signup)
                             ),
                             TextButton(
                                 onPressed: () {

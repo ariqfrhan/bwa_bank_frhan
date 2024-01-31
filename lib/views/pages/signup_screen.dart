@@ -5,8 +5,8 @@ import 'package:bwa_bank_frhan/views/widgets/forms.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SigninScreen extends StatelessWidget {
-  const SigninScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class SigninScreen extends StatelessWidget {
                     image: AssetImage('assets/logo_light.png'))),
           ),
           Text(
-            "Sign In &\nGrow Your Finance",
+            "Join Us to Unlock\nYour Growth",
             style: blackText.copyWith(fontSize: 20, fontWeight: semibold),
           ),
           const SizedBox(
@@ -36,6 +36,10 @@ class SigninScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20), color: whiteColor),
             child: Column(
               children: [
+                const CustomFormField(title: 'Fullname'),
+                const SizedBox(
+                  height: 16,
+                ),
                 const CustomFormField(title: 'Email Address'),
                 const SizedBox(
                   height: 16,
@@ -47,31 +51,23 @@ class SigninScreen extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Forgot Password',
-                          style: blueText.copyWith(fontWeight: regular),
-                        ))),
                 const SizedBox(
                   height: 30,
                 ),
                 CustomFilledButton(
-                  title: 'Sign In',
+                  title: 'Continue',
                   onPressed: () {},
                 )
               ],
             ),
           ),
           const SizedBox(
-            height: 50,
+            height: 20,
           ),
           TextButton(
-              onPressed: () => Get.toNamed(Routes.signup),
+              onPressed: ()=> Get.toNamed(Routes.signin),
               child: Text(
-                "Create Account",
+                "Sign In",
                 style: greyText.copyWith(fontWeight: regular, fontSize: 16),
               ))
         ],
