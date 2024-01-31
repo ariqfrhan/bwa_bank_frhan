@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
-import 'package:bwa_bank_frhan/views/pages/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

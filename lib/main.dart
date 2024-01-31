@@ -1,5 +1,4 @@
 import 'package:bwa_bank_frhan/routes.dart';
-import 'package:bwa_bank_frhan/views/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

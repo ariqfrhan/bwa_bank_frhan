@@ -1,6 +1,8 @@
+import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/views/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignupSuccess extends StatelessWidget {
   const SignupSuccess({super.key});
@@ -26,12 +28,14 @@ class SignupSuccess extends StatelessWidget {
               style: greyText.copyWith(fontSize: 14),
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             CustomFilledButton(
               title: 'Get Started',
-              onPressed: () {},
+              onPressed: () {
+                Get.offAllNamed(Routes.homepage);
+              },
               width: 183,
             )
           ],

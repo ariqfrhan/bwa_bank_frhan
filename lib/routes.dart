@@ -1,5 +1,6 @@
 
 
+import 'package:bwa_bank_frhan/views/pages/home_page.dart';
 import 'package:bwa_bank_frhan/views/pages/onboarding_screen.dart';
 import 'package:bwa_bank_frhan/views/pages/signin_screen.dart';
 import 'package:bwa_bank_frhan/views/pages/signup_profileupload.dart';
@@ -17,6 +18,7 @@ class Routes{
   static String signupUpload = '/sign-up-upload';
   static String signupVerifyKtp = '/signup-verify-ktp';
   static String signupSuccess = '/signup-success';
+  static String homepage = '/home';
 
   static List<GetPage> routes = [
     GetPage(
@@ -46,6 +48,10 @@ class Routes{
     GetPage(
       name: signupSuccess, 
       page: () => const SignupSuccess()
+    ),
+    GetPage(
+      name: homepage, 
+      page: () => const Homepage()
     ),
 
   ];

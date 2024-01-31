@@ -60,7 +60,9 @@ class SigninScreen extends StatelessWidget {
                 ),
                 CustomFilledButton(
                   title: 'Sign In',
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offAllNamed(Routes.homepage);
+                  },
                 )
               ],
             ),
