@@ -1,5 +1,6 @@
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/views/widgets/buttons.dart';
+import 'package:bwa_bank_frhan/views/widgets/forms.dart';
 import 'package:flutter/material.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -33,47 +34,13 @@ class SigninScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20), color: whiteColor),
             child: Column(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Email Address',
-                      style: blackText.copyWith(fontWeight: medium),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                          focusColor: blueColor,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                          contentPadding: const EdgeInsets.all(12)),
-                    ),
-                  ],
-                ),
+                const CustomFormField(title: 'Email Address'),
                 const SizedBox(
                   height: 16,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Password',
-                      style: blackText.copyWith(fontWeight: medium),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          focusColor: blueColor,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                          contentPadding: const EdgeInsets.all(12)),
-                    ),
-                  ],
+                const CustomFormField(
+                  title: 'Password',
+                  obscureText: true,
                 ),
                 const SizedBox(
                   height: 8,

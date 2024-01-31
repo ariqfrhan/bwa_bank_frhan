@@ -1,8 +1,10 @@
+import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/views/pages/signin_screen.dart';
 import 'package:bwa_bank_frhan/views/widgets/buttons.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -97,12 +99,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             TextButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SigninScreen(),
-                                      ));
+                                  Get.toNamed(Routes.signin);
                                 },
                                 child: Text(
                                   "Sign In",
