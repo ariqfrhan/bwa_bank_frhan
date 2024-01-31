@@ -1,6 +1,7 @@
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/views/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PinPage extends StatefulWidget {
   const PinPage({super.key});
@@ -18,6 +19,10 @@ class _PinPageState extends State<PinPage> {
       setState(() {
         pinController.text = pinController.text + number;
       });
+    }
+
+    if (pinController.text == '123123') {
+      Get.back(result: true);
     }
   }
 

@@ -65,12 +65,22 @@ class ProfilePage extends StatelessWidget {
                 ProfileMenuItem(
                   icon: Icons.person_outline,
                   title: 'Edit Profile',
-                  onTap: () {},
+                  onTap: () async{
+                    var data = await Get.toNamed(Routes.pin);
+                    if (data == true) {
+                      Get.toNamed(Routes.profileEdit);
+                    }
+                  },
                 ),
                 ProfileMenuItem(
                   icon: Icons.shield_outlined,
                   title: 'My PIN',
-                  onTap: () => Get.toNamed(Routes.pin),
+                  onTap: () async {
+                    var data = await Get.toNamed(Routes.pin);
+                    if (data == true) {
+                      Get.toNamed(Routes.profileEdit);
+                    }
+                  },
                 ),
                 ProfileMenuItem(
                   icon: Icons.wallet_outlined,
