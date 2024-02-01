@@ -1,5 +1,6 @@
 import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
+import 'package:bwa_bank_frhan/shared/utils.dart';
 import 'package:bwa_bank_frhan/views/widgets/home_latesttransaction_item.dart';
 import 'package:bwa_bank_frhan/views/widgets/home_services_item.dart';
 import 'package:bwa_bank_frhan/views/widgets/home_tips_item.dart';
@@ -160,7 +161,7 @@ class Homepage extends StatelessWidget {
             style: whiteText.copyWith(fontSize: 14),
           ),
           Text(
-            'Rp 55.000',
+            Utils.formatCurrency(55002),
             style: whiteText.copyWith(fontSize: 20, fontWeight: semibold),
           )
         ],
@@ -188,7 +189,7 @@ class Homepage extends StatelessWidget {
                 style: greenText.copyWith(fontWeight: semibold),
               ),
               Text(
-                'of Rp 20.000',
+                ' of ${Utils.formatCurrency(20000)}',
                 style: blackText,
               )
             ],
@@ -246,7 +247,7 @@ class Homepage extends StatelessWidget {
                 title: 'More',
                 onTap: () {
                   showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.transparent,
                       context: context,
                       builder: (context) => const MoreDialog());
                 },
@@ -276,33 +277,33 @@ class Homepage extends StatelessWidget {
             margin: const EdgeInsets.only(top: 14),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20), color: whiteColor),
-            child: const Column(
+            child: Column(
               children: [
                 LatestTransactionItem(
                     iconUrl: 'assets/ic_transaction_category1.png',
                     title: 'Top Up',
                     time: 'Yesterday',
-                    value: '+ Rp 50.000'),
+                    value: '+ ${Utils.formatCurrency(20000)}'),
                 LatestTransactionItem(
                     iconUrl: 'assets/ic_transaction_category2.png',
                     title: 'Cashback',
                     time: 'September 11',
-                    value: '+ Rp 50.000'),
+                    value: '+ ${Utils.formatCurrency(20000)}'),
                 LatestTransactionItem(
                     iconUrl: 'assets/ic_transaction_category3.png',
                     title: 'Withdraw',
                     time: 'Yesterday',
-                    value: '+ Rp 50.000'),
+                    value: '+ ${Utils.formatCurrency(20000)}'),
                 LatestTransactionItem(
                     iconUrl: 'assets/ic_transaction_category4.png',
                     title: 'Transfer',
                     time: 'Yesterday',
-                    value: '+ Rp 50.000'),
+                    value: '+ ${Utils.formatCurrency(20000)}'),
                 LatestTransactionItem(
                     iconUrl: 'assets/ic_transaction_category5.png',
                     title: 'Shopping',
                     time: 'Yesterday',
-                    value: '+ Rp 50.000'),
+                    value: '+ ${Utils.formatCurrency(20000)}'),
               ],
             ),
           )
@@ -356,27 +357,31 @@ class Homepage extends StatelessWidget {
           const SizedBox(
             height: 21,
           ),
-          const Wrap(
-            spacing: 17,
-            runSpacing: 18,
-            children: [
-              HomeTipsItem(
-                  imgUrl: 'assets/onboarding_1.png',
-                  title: 'Tips Menggandakan Uang',
-                  url: 'https://www.google.com'),
-              HomeTipsItem(
-                  imgUrl: 'assets/onboarding_2.png',
-                  title: 'Tips Dapat Uang',
-                  url: 'https://www.google.com'),
-              HomeTipsItem(
-                  imgUrl: 'assets/onboarding_1.png',
-                  title: 'Tips Menggandakan Uang',
-                  url: 'https://www.google.com'),
-              HomeTipsItem(
-                  imgUrl: 'assets/onboarding_2.png',
-                  title: 'Tips Dapat Uang',
-                  url: 'https://www.google.com')
-            ],
+          Container(
+            width: double.infinity,
+            alignment: Alignment.center,
+            child: const Wrap(
+              spacing: 17,
+              runSpacing: 18,
+              children: [
+                HomeTipsItem(
+                    imgUrl: 'assets/onboarding_1.png',
+                    title: 'Tips Menggandakan Uang',
+                    url: 'https://www.google.com'),
+                HomeTipsItem(
+                    imgUrl: 'assets/onboarding_2.png',
+                    title: 'Tips Dapat Uang',
+                    url: 'https://www.google.com'),
+                HomeTipsItem(
+                    imgUrl: 'assets/onboarding_1.png',
+                    title: 'Tips Menggandakan Uang',
+                    url: 'https://www.google.com'),
+                HomeTipsItem(
+                    imgUrl: 'assets/onboarding_2.png',
+                    title: 'Tips Dapat Uang',
+                    url: 'https://www.google.com')
+              ],
+            ),
           )
         ],
       ),
