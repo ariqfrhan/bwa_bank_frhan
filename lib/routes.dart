@@ -67,7 +67,7 @@ class Routes{
     ),
     GetPage(
       name: signupUpload, 
-      page: () => const SignupProfileUpload()
+      page: () =>  const SignupProfileUpload(),
     ),
     GetPage(
       name: signupVerifyKtp, 
