@@ -23,7 +23,7 @@ class Homepage extends StatelessWidget {
           profileSection(),
           walletCard(),
           levelCard(),
-          servicesCard(),
+          servicesCard(context),
           transactionCard(),
           sendAgainCard(),
           tipsCard()
@@ -104,20 +104,21 @@ class Homepage extends StatelessWidget {
             ],
           ),
           ZoomTapAnimation(
-            onTap: ()=>Get.toNamed(Routes.profile),
+            onTap: () => Get.toNamed(Routes.profile),
             child: Container(
               width: 60,
               height: 60,
               decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  image: DecorationImage(image: AssetImage('assets/photo.png'))),
+                  image:
+                      DecorationImage(image: AssetImage('assets/photo.png'))),
               child: Align(
                 alignment: Alignment.topRight,
                 child: Icon(
-                      Icons.check_circle,
-                      color: greenColor,
-                      size: 14,
-                    ),
+                  Icons.check_circle,
+                  color: greenColor,
+                  size: 14,
+                ),
               ),
             ),
           )
@@ -209,7 +210,7 @@ class Homepage extends StatelessWidget {
     );
   }
 
-  Widget servicesCard() {
+  Widget servicesCard(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 30),
       child: Column(
@@ -243,7 +244,12 @@ class Homepage extends StatelessWidget {
               HomeServicesItem(
                 iconUrl: 'assets/ic_more.png',
                 title: 'More',
-                onTap: () {},
+                onTap: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) => const MoreDialog());
+                },
               ),
             ],
           )
@@ -373,6 +379,79 @@ class Homepage extends StatelessWidget {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class MoreDialog extends StatelessWidget {
+  const MoreDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.zero,
+      alignment: Alignment.bottomCenter,
+      content: Container(
+        padding: const EdgeInsets.all(30),
+        height: 326,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(40), color: whiteColor),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Do More with Us',
+              style: blackText.copyWith(fontSize: 16, fontWeight: semibold),
+            ),
+            const SizedBox(
+              height: 13,
+            ),
+            Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: Wrap(
+                runAlignment: WrapAlignment.center,
+                spacing: 29,
+                runSpacing: 25,
+                children: [
+                  HomeServicesItem(
+                    iconUrl: 'assets/ic_data.png',
+                    title: 'Data',
+                    onTap: () => Get.toNamed(Routes.buydata),
+                  ),
+                  HomeServicesItem(
+                    iconUrl: 'assets/ic_water.png',
+                    title: 'Water',
+                    onTap: () => Get.toNamed(Routes.transfer),
+                  ),
+                  HomeServicesItem(
+                    iconUrl: 'assets/ic_stream.png',
+                    title: 'Stream',
+                    onTap: () {},
+                  ),
+                  HomeServicesItem(
+                    iconUrl: 'assets/ic_movie.png',
+                    title: 'Movie',
+                    onTap: () => Get.toNamed(Routes.topup),
+                  ),
+                  HomeServicesItem(
+                    iconUrl: 'assets/ic_food.png',
+                    title: 'Food',
+                    onTap: () => Get.toNamed(Routes.transfer),
+                  ),
+                  HomeServicesItem(
+                    iconUrl: 'assets/ic_travel.png',
+                    title: 'Travel',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

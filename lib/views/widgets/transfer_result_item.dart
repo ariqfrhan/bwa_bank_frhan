@@ -1,6 +1,6 @@
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:zoom_tap_animation/zoom_tap_animation.dart';
+
 
 class TransferResultItem extends StatelessWidget {
   final String imgUrl;

@@ -1,5 +1,8 @@
 
 
+import 'package:bwa_bank_frhan/views/pages/buydata_page.dart';
+import 'package:bwa_bank_frhan/views/pages/buydata_paket_page.dart';
+import 'package:bwa_bank_frhan/views/pages/buydata_success.dart';
 import 'package:bwa_bank_frhan/views/pages/home_page.dart';
 import 'package:bwa_bank_frhan/views/pages/onboarding_screen.dart';
 import 'package:bwa_bank_frhan/views/pages/pin_edit_page.dart';
@@ -41,6 +44,9 @@ class Routes{
   static String transfer = '/transfer';
   static String transferAmount = '/transfer-amount';
   static String transferSuccess = '/transfer-success';
+  static String buydata = '/buydata';
+  static String buydataPaket = '/buydata-paket';
+  static String buydataSuccess = '/buydata-success';
 
   static List<GetPage> routes = [
     GetPage(
@@ -118,6 +124,18 @@ class Routes{
     GetPage(
       name: transferSuccess, 
       page: () => const TransferSuccess()
+    ),
+    GetPage(
+      name: buydata, 
+      page: () => const BuydataPage()
+    ),
+    GetPage(
+      name: buydataPaket, 
+      page: () => const BuydataPaketPage()
+    ),
+    GetPage(
+      name: buydataSuccess, 
+      page: () => const BuydataSuccess()
     ),
 
   ];
