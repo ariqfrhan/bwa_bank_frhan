@@ -113,14 +113,11 @@ class Homepage extends StatelessWidget {
                   image: DecorationImage(image: AssetImage('assets/photo.png'))),
               child: Align(
                 alignment: Alignment.topRight,
-                child: Container(
-                    decoration: BoxDecoration(
-                        color: greenColor,
-                        borderRadius: BorderRadius.circular(100)),
-                    child: Icon(
-                      Icons.check,
-                      color: whiteColor,
-                    )),
+                child: Icon(
+                      Icons.check_circle,
+                      color: greenColor,
+                      size: 14,
+                    ),
               ),
             ),
           )
@@ -236,7 +233,7 @@ class Homepage extends StatelessWidget {
               HomeServicesItem(
                 iconUrl: 'assets/ic_send.png',
                 title: 'Send',
-                onTap: () {},
+                onTap: () => Get.toNamed(Routes.transfer),
               ),
               HomeServicesItem(
                 iconUrl: 'assets/ic_withdraw.png',
@@ -353,10 +350,10 @@ class Homepage extends StatelessWidget {
           const SizedBox(
             height: 21,
           ),
-          Wrap(
+          const Wrap(
             spacing: 17,
             runSpacing: 18,
-            children: const [
+            children: [
               HomeTipsItem(
                   imgUrl: 'assets/onboarding_1.png',
                   title: 'Tips Menggandakan Uang',

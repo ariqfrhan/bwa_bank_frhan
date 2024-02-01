@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class TopupAmountPage extends StatefulWidget {
-  const TopupAmountPage({super.key});
+class TransferAmountPage extends StatefulWidget {
+  const TransferAmountPage({super.key});
 
   @override
-  State<TopupAmountPage> createState() => _TopupAmountPageState();
+  State<TransferAmountPage> createState() => _TransferAmountPageState();
 }
 
-class _TopupAmountPageState extends State<TopupAmountPage> {
+class _TransferAmountPageState extends State<TransferAmountPage> {
   final TextEditingController amountController =
       TextEditingController(text: '0');
 
@@ -198,8 +198,8 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
             title: 'Checkout Now',
             onPressed: () async {
               var data = await Get.toNamed(Routes.pin);
-              if (data == true) {
-                await launchUrlString("https://demo.midtrans.com/");
+              if (data) {
+                Get.offNamed(Routes.transferSuccess);
               }
             },
           ),

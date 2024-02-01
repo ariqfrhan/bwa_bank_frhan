@@ -16,6 +16,9 @@ import 'package:bwa_bank_frhan/views/pages/splash_screen.dart';
 import 'package:bwa_bank_frhan/views/pages/topup_amount_page.dart';
 import 'package:bwa_bank_frhan/views/pages/topup_page.dart';
 import 'package:bwa_bank_frhan/views/pages/topup_success.dart';
+import 'package:bwa_bank_frhan/views/pages/transfer_amount_page.dart';
+import 'package:bwa_bank_frhan/views/pages/transfer_page.dart';
+import 'package:bwa_bank_frhan/views/pages/transfer_success.dart';
 import 'package:get/get.dart';
 
 class Routes{
@@ -35,6 +38,9 @@ class Routes{
   static String topup = '/topup';
   static String topupAmount = '/topup-amount';
   static String topupSuccess = '/topup-success';
+  static String transfer = '/transfer';
+  static String transferAmount = '/transfer-amount';
+  static String transferSuccess = '/transfer-success';
 
   static List<GetPage> routes = [
     GetPage(
@@ -100,6 +106,18 @@ class Routes{
     GetPage(
       name: topupSuccess, 
       page: () => const TopupSuccess()
+    ),
+    GetPage(
+      name: transfer, 
+      page: () => const TransferPage()
+    ),
+    GetPage(
+      name: transferAmount, 
+      page: () => const TransferAmountPage()
+    ),
+    GetPage(
+      name: transferSuccess, 
+      page: () => const TransferSuccess()
     ),
 
   ];
