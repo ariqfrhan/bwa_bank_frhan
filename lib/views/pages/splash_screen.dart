@@ -13,12 +13,10 @@ class SplashScreen extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessLogin) {
-          print("User successfully authenticated");
           Get.offAllNamed(Routes.homepage);
         }
 
         if (state is AuthFailed) {
-          print("Authentication failed: ${state.toString()}");
           Get.offAllNamed(Routes.onboarding);
         }
       },

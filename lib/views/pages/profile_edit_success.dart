@@ -31,7 +31,7 @@ class ProfileEditSuccess extends StatelessWidget {
               height: 30,
             ),
             CustomFilledButton(
-              title: 'See Your Journey',
+              title: 'Back to Home',
               onPressed: () {
                 Get.offAllNamed(Routes.homepage);
               },

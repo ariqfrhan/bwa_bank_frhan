@@ -1,7 +1,10 @@
+import 'package:bwa_bank_frhan/blocs/bloc/auth_bloc.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
+import 'package:bwa_bank_frhan/shared/utils.dart';
 import 'package:bwa_bank_frhan/views/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PinPage extends StatefulWidget {
   const PinPage({super.key});
@@ -11,26 +14,47 @@ class PinPage extends StatefulWidget {
 }
 
 class _PinPageState extends State<PinPage> {
-
   final TextEditingController pinController = TextEditingController();
+  String? pin = '';
+  bool isError = false;
 
-  addPin(String number){
-    if (pinController.text.length<6) {
+  addPin(String number) {
+    if (pinController.text.length < 6) {
       setState(() {
+        isError = false;
         pinController.text = pinController.text + number;
       });
     }
 
-    if (pinController.text == '123123') {
-      Get.back(result: true);
+    if (pinController.text.length == 6) {
+      if (pinController.text == pin) {
+        Get.back(result: true);
+      } else {
+        setState(() {
+          isError = true;
+        });
+        Utils.getSnackBar('PIN anda salah, silahkan coba lagi');
+      }
     }
   }
 
-  deletePin(){
+  deletePin() {
     if (pinController.text.isNotEmpty) {
       setState(() {
-        pinController.text = pinController.text.substring(0, pinController.text.length-1);
+        isError = false;
+        pinController.text =
+            pinController.text.substring(0, pinController.text.length - 1);
       });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    final authState = context.read<AuthBloc>().state;
+    if (authState is AuthSuccessLogin) {
+      pin = authState.user.pin;
     }
   }
 
@@ -61,12 +85,15 @@ class _PinPageState extends State<PinPage> {
                   obscuringCharacter: '*',
                   enabled: false,
                   style: whiteText.copyWith(
-                      fontSize: 36, fontWeight: medium, letterSpacing: 16),
+                      fontSize: 36,
+                      fontWeight: medium,
+                      letterSpacing: 16,
+                      color: isError ? pinkColor : whiteColor),
                   decoration: InputDecoration(
                     disabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: greyColor)),
+                        borderSide: BorderSide(color: isError ? pinkColor : greyColor)),
                     focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: greyColor)),
+                        borderSide: BorderSide(color: isError ? pinkColor :  greyColor)),
                   ),
                 ),
               ),
@@ -151,7 +178,10 @@ class _PinPageState extends State<PinPage> {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle, color: numberColor),
                       child: Center(
-                        child: Icon(Icons.arrow_back_ios_new, color: whiteColor,),
+                        child: Icon(
+                          Icons.arrow_back_ios_new,
+                          color: whiteColor,
+                        ),
                       ),
                     ),
                   )
