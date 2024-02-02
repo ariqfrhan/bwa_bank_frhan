@@ -4,6 +4,7 @@ import 'package:bwa_bank_frhan/models/user_edit_form_model.dart';
 import 'package:bwa_bank_frhan/models/user_model.dart';
 import 'package:bwa_bank_frhan/services/auth_services.dart';
 import 'package:bwa_bank_frhan/services/user_services.dart';
+import 'package:bwa_bank_frhan/services/wallet_services.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -51,6 +52,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
       }
 
+      if (event is AuthLogout) {
+        try {
+          emit(AuthLoading());
+          await AuthServices().logout();
+
+          emit(AuthInitial());
+        } catch (e) {
+          emit(AuthFailed(e.toString()));
+        }
+      }
+
       if (event is AuthGetCurrentUser) {
         try {
           emit(AuthLoading());
@@ -69,15 +81,31 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         try {
           if (state is AuthSuccessLogin) {
             final updatedUser = (state as AuthSuccessLogin).user.copyWith(
-              username: event.data.username,
-              name: event.data.fullname,
-              email: event.data.email,
-              password: event.data.password
-            );
+                username: event.data.username,
+                name: event.data.fullname,
+                email: event.data.email,
+                password: event.data.password);
 
             emit(AuthLoading());
 
             await UserServices().updateUser(event.data);
+
+            emit(AuthSuccessLogin(updatedUser));
+          }
+        } catch (e) {
+          emit(AuthFailed(e.toString()));
+        }
+      }
+
+      if (event is AuthUpdatePIN) {
+        try {
+          if (state is AuthSuccessLogin) {
+            final updatedUser =
+                (state as AuthSuccessLogin).user.copyWith(pin: event.newpin);
+
+            emit(AuthLoading());
+
+            await WalletServices().updatePin(event.oldpin, event.newpin);
 
             emit(AuthSuccessLogin(updatedUser));
           }

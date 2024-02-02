@@ -33,6 +33,8 @@ class AuthLogin extends AuthEvent{
   List<Object> get props => [data];
 }
 
+class AuthLogout extends AuthEvent{}
+
 class AuthGetCurrentUser extends AuthEvent{}
 
 class AuthUpdateUser extends AuthEvent{
@@ -41,4 +43,12 @@ class AuthUpdateUser extends AuthEvent{
 
   @override
   List<Object> get props => [data];
+}
+class AuthUpdatePIN extends AuthEvent{
+  final String oldpin;
+  final String newpin;
+  const AuthUpdatePIN(this.oldpin, this.newpin);
+
+  @override
+  List<Object> get props => [oldpin, newpin];
 }

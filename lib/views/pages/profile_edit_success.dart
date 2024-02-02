@@ -33,7 +33,7 @@ class ProfileEditSuccess extends StatelessWidget {
             CustomFilledButton(
               title: 'Back to Home',
               onPressed: () {
-                Get.offAllNamed(Routes.homepage);
+                Get.offAllNamed(Routes.profile);
               },
               width: 183,
             )
