@@ -21,6 +21,7 @@ class SignupVerifyKtp extends StatefulWidget {
 
 class _SignupVerifyKtpState extends State<SignupVerifyKtp> {
   late SignupFormModel data;
+  XFile? selectedImage;
 
   @override
   void initState() {
@@ -30,13 +31,10 @@ class _SignupVerifyKtpState extends State<SignupVerifyKtp> {
 
   bool validation() {
     if (selectedImage == null) {
-      print(selectedImage.toString());
       return false;
     }
     return true;
   }
-
-  XFile? selectedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -120,11 +118,16 @@ class _SignupVerifyKtpState extends State<SignupVerifyKtp> {
                             title: 'Continue',
                             onPressed: () {
                               if (validation()) {
+                                String? imageData;
+                                if (selectedImage != null) {
+                                  // ignore: prefer_interpolation_to_compose_strings
+                                  imageData = 'data:image/png;base64,' +
+                                      base64Encode(File(selectedImage!.path)
+                                          .readAsBytesSync());
+                                }
                                 context.read<AuthBloc>().add(AuthRegister(
-                                    data.copyWith(
-                                        ktp: selectedImage != null
-                                            ? 'data:image/png;base64,${base64Encode(File(selectedImage!.path).readAsBytesSync())}'
-                                            : null)));
+                                      data.copyWith(ktp: imageData),
+                                    ));
                               } else {
                                 Utils.getSnackBar('Gambar tidak boleh kosong');
                               }

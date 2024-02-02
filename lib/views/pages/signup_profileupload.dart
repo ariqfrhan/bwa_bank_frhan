@@ -110,11 +110,15 @@ class _SignupProfileUploadState extends State<SignupProfileUpload> {
                     onPressed: () {
                       if (validation()) {
                         Get.toNamed(Routes.signupVerifyKtp,
-                            arguments: SignupFormModel(
+                            arguments: data.copyWith(
                                 pin: pinController.text,
                                 profilePicture: selectedImage == null
                                     ? null
-                                    : 'data:image/png;base64,${base64Encode(File(selectedImage!.path).readAsBytesSync())}'));
+                                    // ignore: prefer_interpolation_to_compose_strings
+                                    : 'data:image/png;base64,' +
+                                                base64Encode(
+                                                    File(selectedImage!.path)
+                                                        .readAsBytesSync())));
                       } else {
                         Utils.getSnackBar('PIN harus berjumlah 6 digit');
                       }
