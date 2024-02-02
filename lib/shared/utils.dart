@@ -18,6 +18,13 @@ class Utils {
     return NumberFormat.currency(locale: 'id', symbol: symbol, decimalDigits: 0)
         .format(amount);
   }
+
+  static String formatCardNumber(String cardNumber) {
+    String clean = cardNumber.replaceAll(" ", "");
+
+    return clean.replaceAllMapped(
+        RegExp(r".{4}"), (Match match) => "${match.group(0)} ");
+  }
 }
 
 Future<XFile?> selectImage() async {

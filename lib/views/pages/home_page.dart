@@ -1,3 +1,4 @@
+import 'package:bwa_bank_frhan/blocs/bloc/auth_bloc.dart';
 import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/shared/utils.dart';
@@ -6,6 +7,7 @@ import 'package:bwa_bank_frhan/views/widgets/home_services_item.dart';
 import 'package:bwa_bank_frhan/views/widgets/home_tips_item.dart';
 import 'package:bwa_bank_frhan/views/widgets/home_useritem.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
@@ -86,86 +88,111 @@ class Homepage extends StatelessWidget {
   }
 
   Widget profileSection() {
-    return Container(
-      margin: const EdgeInsets.only(top: 40),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Howdy,",
-                style: greyText.copyWith(fontSize: 16),
-              ),
-              Text(
-                'Ariq Farhan',
-                style: blackText.copyWith(fontWeight: semibold, fontSize: 20),
-              )
-            ],
-          ),
-          ZoomTapAnimation(
-            onTap: () => Get.toNamed(Routes.profile),
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image:
-                      DecorationImage(image: AssetImage('assets/photo.png'))),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Icon(
-                  Icons.check_circle,
-                  color: greenColor,
-                  size: 14,
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return state is AuthSuccessLogin
+            ? Container(
+                margin: const EdgeInsets.only(top: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Howdy,",
+                          style: greyText.copyWith(fontSize: 16),
+                        ),
+                        Text(
+                          state.user.name!,
+                          style: blackText.copyWith(
+                              fontWeight: semibold, fontSize: 20),
+                        )
+                      ],
+                    ),
+                    ZoomTapAnimation(
+                      onTap: () => Get.toNamed(Routes.profile),
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: state.user.profilePicture != null
+                                    ? NetworkImage(state.user.profilePicture!)
+                                    : const AssetImage('assets/photo.png')
+                                        as ImageProvider)),
+                        child: state.user.verified == 1
+                            ? Align(
+                                alignment: Alignment.topRight,
+                                child: Icon(
+                                  Icons.check_circle,
+                                  color: greenColor,
+                                  size: 14,
+                                ),
+                              )
+                            : Container(),
+                      ),
+                    )
+                  ],
                 ),
-              ),
-            ),
-          )
-        ],
-      ),
+              )
+            : Container();
+      },
     );
   }
 
   Widget walletCard() {
-    return Container(
-      width: double.infinity,
-      height: 220,
-      margin: const EdgeInsets.only(top: 30),
-      padding: const EdgeInsets.all(30),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(28),
-          image: const DecorationImage(
-              image: AssetImage('assets/bg_card.png'), fit: BoxFit.cover)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Ariq Farhan',
-            style: whiteText.copyWith(fontSize: 18, fontWeight: medium),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          Text(
-            '**** **** **** 1280',
-            style: whiteText.copyWith(
-                fontSize: 18, fontWeight: medium, letterSpacing: 6),
-          ),
-          const SizedBox(
-            height: 21,
-          ),
-          Text(
-            'Balance',
-            style: whiteText.copyWith(fontSize: 14),
-          ),
-          Text(
-            Utils.formatCurrency(55002),
-            style: whiteText.copyWith(fontSize: 20, fontWeight: semibold),
-          )
-        ],
-      ),
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return state is AuthSuccessLogin
+            ? Container(
+                width: double.infinity,
+                height: 220,
+                margin: const EdgeInsets.only(top: 30),
+                padding: const EdgeInsets.all(30),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(28),
+                    image: const DecorationImage(
+                        image: AssetImage('assets/bg_card.png'),
+                        fit: BoxFit.cover)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      state.user.name!,
+                      style:
+                          whiteText.copyWith(fontSize: 18, fontWeight: medium),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Text(
+                      Utils.formatCardNumber(state.user.cardNumber.toString()),
+                      style: whiteText.copyWith(
+                        fontSize: 18,
+                        fontWeight: medium,
+                        letterSpacing: 2
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 21,
+                    ),
+                    Text(
+                      'Balance',
+                      style: whiteText.copyWith(fontSize: 14),
+                    ),
+                    Text(
+                      Utils.formatCurrency(state.user.balance!),
+                      style: whiteText.copyWith(
+                          fontSize: 20, fontWeight: semibold),
+                    )
+                  ],
+                ),
+              )
+            : Container();
+      },
     );
   }
 
