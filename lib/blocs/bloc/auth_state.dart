@@ -28,3 +28,11 @@ final class AuthSuccessRegister extends AuthState{
   @override
   List<Object> get props => [user];
 }
+
+final class AuthSuccessLogin extends AuthState{
+  final UserModel user;
+  const AuthSuccessLogin(this.user);
+
+  @override
+  List<Object> get props => [user];
+}

@@ -1,4 +1,5 @@
 
+import 'package:bwa_bank_frhan/models/siginin_form_model.dart';
 import 'package:bwa_bank_frhan/models/signup_form_model.dart';
 import 'package:bwa_bank_frhan/models/user_model.dart';
 import 'package:bwa_bank_frhan/services/auth_services.dart';
@@ -37,6 +38,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthFailed(e.toString()));
         }
       }
+
+      if (event is AuthLogin) {
+        try {
+          emit(AuthLoading());
+
+          final user = await AuthServices().signin(event.data);
+
+          emit(AuthSuccessLogin(user));
+          
+        } catch (e) {
+          emit(AuthFailed(e.toString()));
+        }
+      }
+
+      if (event is AuthGetCurrentUser) {
+        try {
+          emit(AuthLoading());
+
+          final SigninFormModel data = await AuthServices().getCredentialFromLocal();
+          final UserModel user = await AuthServices().signin(data);
+
+          emit(AuthSuccessLogin(user));
+          
+        } catch (e) {
+          emit(AuthFailed(e.toString()));
+        }
+      }
+      
     });
   }
 }

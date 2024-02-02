@@ -23,3 +23,14 @@ class AuthRegister extends AuthEvent{
   @override
   List<Object> get props => [data];
 }
+
+class AuthLogin extends AuthEvent{
+
+  final SigninFormModel data;
+  const AuthLogin(this.data);
+
+  @override
+  List<Object> get props => [data];
+}
+
+class AuthGetCurrentUser extends AuthEvent{}
