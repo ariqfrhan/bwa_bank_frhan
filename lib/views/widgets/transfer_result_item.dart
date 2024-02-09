@@ -1,18 +1,21 @@
+import 'package:bwa_bank_frhan/models/user_model.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:flutter/material.dart';
 
-
 class TransferResultItem extends StatelessWidget {
-  final String imgUrl;
-  final String name;
-  final String username;
+  final UserModel user;
+
+  final String? imgUrl;
+  final String? name;
+  final String? username;
   final bool isVerified;
   final bool isSelected;
   const TransferResultItem(
       {super.key,
-      required this.imgUrl,
-      required this.name,
-      required this.username,
+      required this.user,
+      this.imgUrl,
+      this.name,
+      this.username,
       this.isVerified = false,
       this.isSelected = false});
 
@@ -23,22 +26,22 @@ class TransferResultItem extends StatelessWidget {
       height: 175,
       padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 12),
       decoration: BoxDecoration(
-        color: whiteColor,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: isSelected ? blueColor : whiteColor,
-          width: 2
-        )
-      ),
+          color: whiteColor,
+          borderRadius: BorderRadius.circular(20),
+          border:
+              Border.all(color: isSelected ? blueColor : whiteColor, width: 2)),
       child: Column(
         children: [
           Container(
               width: 60,
               height: 60,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  image:
-                      DecorationImage(image: AssetImage('assets/photo.png'))),
+                  image: DecorationImage(
+                      image: user.profilePicture == null
+                          ? const AssetImage('assets/photo.png')
+                          : NetworkImage(user.profilePicture!)
+                              as ImageProvider)),
               child: isVerified
                   ? Align(
                       alignment: Alignment.topRight,
@@ -55,15 +58,21 @@ class TransferResultItem extends StatelessWidget {
             height: 14,
           ),
           Text(
-            name,
+            user.name!.length > 16 ? user.name!.substring(0, 16) : user.name!,
             style: blackText.copyWith(fontSize: 16, fontWeight: medium),
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(
             height: 2,
           ),
-          Text('@$username', style: greyText.copyWith(
-            fontSize: 12, fontWeight: regular
-          ),)
+          Text(
+            '@${user.username}'.length > 14
+                ? '@${user.username}'.substring(0, 14)
+                : '@${user.username}',
+            style: greyText.copyWith(fontSize: 12, fontWeight: regular),
+            overflow: TextOverflow.ellipsis,
+          )
         ],
       ),
     );

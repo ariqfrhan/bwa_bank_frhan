@@ -86,6 +86,7 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
             if (state is TopupSuccess) {
               await launchUrlString(state.redirectUrl);
 
+              // ignore: use_build_context_synchronously
               context.read<AuthBloc>().add(AuthUpdateBalance(
                   int.parse(amountController.text.replaceAll('.', ''))));
 

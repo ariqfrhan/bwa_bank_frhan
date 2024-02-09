@@ -1,4 +1,5 @@
 import 'package:bwa_bank_frhan/blocs/bloc/auth_bloc.dart';
+import 'package:bwa_bank_frhan/blocs/user/user_bloc.dart';
 import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:flutter/material.dart';
@@ -14,16 +15,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthBloc()..add(AuthGetCurrentUser()))
+        BlocProvider(create: (context) => AuthBloc()..add(AuthGetCurrentUser())),
+        BlocProvider(create: (context) => UserBloc()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             scaffoldBackgroundColor: lightBg,
             appBarTheme: AppBarTheme(
-                iconTheme: IconThemeData(
-                  color: blackColor
-                ),
+                iconTheme: IconThemeData(color: blackColor),
                 centerTitle: true,
                 backgroundColor: lightBg,
                 elevation: 0,

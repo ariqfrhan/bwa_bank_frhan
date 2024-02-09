@@ -1,18 +1,22 @@
+import 'package:bwa_bank_frhan/models/user_model.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class TransferRecentUserItem extends StatelessWidget {
-  final String imgUrl;
-  final String name;
-  final String username;
+  final UserModel user;
+
+  final String? imgUrl;
+  final String? name;
+  final String? username;
   final bool isVerified;
   final bool isSelected;
 
   const TransferRecentUserItem(
       {super.key,
-      required this.imgUrl,
-      required this.name,
-      required this.username,
+      required this.user,
+      this.imgUrl,
+      this.name,
+      this.username,
       this.isVerified = false,
       this.isSelected = false});
 
@@ -31,26 +35,29 @@ class TransferRecentUserItem extends StatelessWidget {
             margin: const EdgeInsets.only(right: 14),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                image: DecorationImage(image: AssetImage(imgUrl))),
+                image: DecorationImage(
+                    image: user.profilePicture == null
+                        ? const AssetImage('assets/photo.png')
+                        : NetworkImage(user.profilePicture!) as ImageProvider)),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                user.name!,
                 style: blackText.copyWith(fontSize: 16, fontWeight: medium),
               ),
               const SizedBox(
                 height: 2,
               ),
               Text(
-                '@$username',
+                '@${user.username}',
                 style: greyText.copyWith(fontSize: 12, fontWeight: regular),
               )
             ],
           ),
           const Spacer(),
-          isVerified
+          user.verified == 1
               ? Row(
                   children: [
                     Icon(
