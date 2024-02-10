@@ -1,14 +1,13 @@
+import 'package:bwa_bank_frhan/models/operatorcard_model.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class ProviderItem extends StatelessWidget {
-  final String imgUrl;
-  final String name;
+  final OperatorCardModel operator;
   final bool isSelected;
   const ProviderItem(
       {super.key,
-      required this.imgUrl,
-      required this.name,
+      required this.operator,
       this.isSelected = false});
 
   @override
@@ -25,15 +24,15 @@ class ProviderItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(
-            imgUrl,
+          Image.network(
+            operator.thumbnail.toString(),
             height: 30,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                name,
+                operator.name.toString(),
                 style: blackText.copyWith(fontSize: 16, fontWeight: medium),
               ),
               const SizedBox(

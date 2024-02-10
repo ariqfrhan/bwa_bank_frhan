@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bwa_bank_frhan/models/topup_form_model.dart';
+import 'package:bwa_bank_frhan/models/transaction_model.dart';
 import 'package:bwa_bank_frhan/models/transfer_form_model.dart';
 import 'package:bwa_bank_frhan/services/auth_services.dart';
 import 'package:bwa_bank_frhan/shared/values.dart';
@@ -16,7 +17,7 @@ class TransactionServices {
 
       if (res.statusCode == 200) {
         return jsonDecode(res.body)['redirect_url'];
-      }else{
+      } else {
         throw jsonDecode(res.body)['message'];
       }
     } catch (e) {
@@ -32,6 +33,27 @@ class TransactionServices {
           headers: {'Authorization': token}, body: data.toJson());
 
       if (res.statusCode != 200) {
+        throw jsonDecode(res.body)['message'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<TransactionModel>> getTransactions() async {
+    try {
+      final token = await AuthServices().getToken();
+
+      final res = await http.get(Uri.parse('$baseUrl/transactions'),
+          headers: {'Authorization': token});
+
+      if (res.statusCode == 200) {
+        return List<TransactionModel>.from(
+          jsonDecode(res.body)['data'].map(
+            (transaction) => TransactionModel.fromJson(transaction),
+          ),
+        ).toList();
+      } else {
         throw jsonDecode(res.body)['message'];
       }
     } catch (e) {

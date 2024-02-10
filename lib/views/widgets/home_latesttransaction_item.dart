@@ -1,17 +1,12 @@
+import 'package:bwa_bank_frhan/models/transaction_model.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
+import 'package:bwa_bank_frhan/shared/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class LatestTransactionItem extends StatelessWidget {
-  final String iconUrl;
-  final String title;
-  final String time;
-  final String value;
-  const LatestTransactionItem(
-      {super.key,
-      required this.iconUrl,
-      required this.title,
-      required this.time,
-      required this.value});
+  final TransactionModel transaction;
+  const LatestTransactionItem({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +16,7 @@ class LatestTransactionItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            iconUrl,
+            Utils.setTransactionThumbnail(transaction.transactionType!.code!),
             width: 48,
           ),
           const SizedBox(
@@ -31,21 +26,28 @@ class LatestTransactionItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: blackText.copyWith(
-                  fontWeight: medium, fontSize: 16
-                ),),
+                Text(
+                  transaction.transactionType!.name.toString(),
+                  style: blackText.copyWith(fontWeight: medium, fontSize: 16),
+                ),
                 const SizedBox(
                   height: 2,
                 ),
-                Text(time, style: greyText.copyWith(
-                  fontSize: 12
-                ),)
+                Text(
+                  DateFormat('MMM dd')
+                      .format(transaction.createdAt ?? DateTime.now()),
+                  style: greyText.copyWith(fontSize: 12),
+                )
               ],
             ),
           ),
-          Text(value, style: blackText.copyWith(
-            fontWeight: medium, fontSize: 16
-          ),)
+          Text(
+            Utils.formatCurrency(transaction.amount ?? 0,
+                symbol: transaction.transactionType!.action == 'cr'
+                    ? '+ Rp'
+                    : '- Rp'),
+            style: blackText.copyWith(fontWeight: medium, fontSize: 16),
+          )
         ],
       ),
     );

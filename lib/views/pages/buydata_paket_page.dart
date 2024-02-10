@@ -1,13 +1,41 @@
+import 'package:bwa_bank_frhan/blocs/operator_card/operator_card_bloc.dart';
+import 'package:bwa_bank_frhan/models/data_plan_model.dart';
+import 'package:bwa_bank_frhan/models/operatorcard_model.dart';
 import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/views/widgets/buttons.dart';
 import 'package:bwa_bank_frhan/views/widgets/forms.dart';
 import 'package:bwa_bank_frhan/views/widgets/package_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-class BuydataPaketPage extends StatelessWidget {
+class BuydataPaketPage extends StatefulWidget {
   const BuydataPaketPage({super.key});
+
+  @override
+  State<BuydataPaketPage> createState() => _BuydataPaketPageState();
+}
+
+class _BuydataPaketPageState extends State<BuydataPaketPage> {
+  OperatorCardModel? operatorCard;
+  late DataPlanModel data;
+  final phoneController = TextEditingController(text: '');
+  DataPlanModel? isSelected;
+
+  @override
+  void initState() {
+    super.initState();
+
+    data = Get.arguments as DataPlanModel;
+
+    fetchOperatorCards();
+  }
+
+  void fetchOperatorCards() async {
+    context.read<OperatorCardBloc>().add(OperatorCardGet());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +60,8 @@ class BuydataPaketPage extends StatelessWidget {
           const SizedBox(
             height: 14,
           ),
-          const CustomFormField(
+          CustomFormField(
+            controller: phoneController,
             title: "",
             hint: '+62',
             isShowTitle: false,
@@ -74,28 +103,26 @@ class BuydataPaketPage extends StatelessWidget {
           Container(
             width: double.infinity,
             alignment: Alignment.center,
-            child: const Wrap(
-              spacing: 17,
-              runSpacing: 17,
-              children: [
-                PackageItem(
-                  amount: 5,
-                  price: 50000,
-                  isSelected: true,
-                ),
-                PackageItem(
-                  amount: 10,
-                  price: 100000,
-                ),
-                PackageItem(
-                  amount: 25,
-                  price: 2000000,
-                ),
-                PackageItem(
-                  amount: 40,
-                  price: 1000000,
-                ),
-              ],
+            child: BlocBuilder<OperatorCardBloc, OperatorCardState>(
+              builder: (context, state) {
+                return state is OperatorCardSuccess
+                    ? Wrap(
+                        spacing: 17,
+                        runSpacing: 17,
+                        children: [
+                          for (var e in state.operatorCard
+                              .where((card) => card.id == data.operatorCardId)
+                              .expand((card) => card.dataPlan ?? []))
+                            ZoomTapAnimation(
+                              child: PackageItem(
+                                dataPlan: e,
+                                isSelected: e.id == isSelected?.id,
+                              ),
+                            )
+                        ],
+                      )
+                    : const CircularProgressIndicator();
+              },
             ),
           ),
         ],

@@ -1,15 +1,14 @@
+import 'package:bwa_bank_frhan/models/data_plan_model.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/shared/utils.dart';
 import 'package:flutter/material.dart';
 
 class PackageItem extends StatelessWidget {
-  final int amount;
-  final int price;
+  final DataPlanModel dataPlan;
   final bool isSelected;
   const PackageItem(
       {super.key,
-      required this.amount,
-      required this.price,
+      required this.dataPlan,
       this.isSelected = false});
 
   @override
@@ -31,13 +30,13 @@ class PackageItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '$amount GB',
+              dataPlan.name.toString(),
               style: blackText.copyWith(fontSize: 32, fontWeight: medium),
             ),
             const SizedBox(
               height: 2,
             ),
-            Text(Utils.formatCurrency(price), style: greyText.copyWith(
+            Text(Utils.formatCurrency(dataPlan.price ?? 0), style: greyText.copyWith(
               fontSize: 12, fontWeight: regular
             ),)
           ],

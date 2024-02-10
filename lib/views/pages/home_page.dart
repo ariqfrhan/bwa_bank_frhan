@@ -1,4 +1,8 @@
 import 'package:bwa_bank_frhan/blocs/bloc/auth_bloc.dart';
+import 'package:bwa_bank_frhan/blocs/tips/tips_bloc.dart';
+import 'package:bwa_bank_frhan/blocs/transaction/transaction_bloc.dart';
+import 'package:bwa_bank_frhan/blocs/user/user_bloc.dart';
+import 'package:bwa_bank_frhan/models/transfer_form_model.dart';
 import 'package:bwa_bank_frhan/routes.dart';
 import 'package:bwa_bank_frhan/shared/theme.dart';
 import 'package:bwa_bank_frhan/shared/utils.dart';
@@ -171,10 +175,7 @@ class Homepage extends StatelessWidget {
                     Text(
                       Utils.formatCardNumber(state.user.cardNumber.toString()),
                       style: whiteText.copyWith(
-                        fontSize: 18,
-                        fontWeight: medium,
-                        letterSpacing: 2
-                      ),
+                          fontSize: 18, fontWeight: medium, letterSpacing: 2),
                     ),
                     const SizedBox(
                       height: 21,
@@ -304,34 +305,22 @@ class Homepage extends StatelessWidget {
             margin: const EdgeInsets.only(top: 14),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20), color: whiteColor),
-            child: Column(
-              children: [
-                LatestTransactionItem(
-                    iconUrl: 'assets/ic_transaction_category1.png',
-                    title: 'Top Up',
-                    time: 'Yesterday',
-                    value: '+ ${Utils.formatCurrency(20000)}'),
-                LatestTransactionItem(
-                    iconUrl: 'assets/ic_transaction_category2.png',
-                    title: 'Cashback',
-                    time: 'September 11',
-                    value: '+ ${Utils.formatCurrency(20000)}'),
-                LatestTransactionItem(
-                    iconUrl: 'assets/ic_transaction_category3.png',
-                    title: 'Withdraw',
-                    time: 'Yesterday',
-                    value: '+ ${Utils.formatCurrency(20000)}'),
-                LatestTransactionItem(
-                    iconUrl: 'assets/ic_transaction_category4.png',
-                    title: 'Transfer',
-                    time: 'Yesterday',
-                    value: '+ ${Utils.formatCurrency(20000)}'),
-                LatestTransactionItem(
-                    iconUrl: 'assets/ic_transaction_category5.png',
-                    title: 'Shopping',
-                    time: 'Yesterday',
-                    value: '+ ${Utils.formatCurrency(20000)}'),
-              ],
+            child: BlocProvider(
+              create: (context) => TransactionBloc()..add(TransactionGet()),
+              child: BlocBuilder<TransactionBloc, TransactionState>(
+                builder: (context, state) {
+                  return state is TransactionSuccess
+                      ? Column(
+                          children: state.transactions.map((transaction) {
+                            return LatestTransactionItem(
+                                transaction: transaction);
+                          }).toList(),
+                        )
+                      : const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                },
+              ),
             ),
           )
         ],
@@ -352,18 +341,30 @@ class Homepage extends StatelessWidget {
           const SizedBox(
             height: 14,
           ),
-          const SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                HomeUserItem(imgUrl: 'assets/photo_2.png', username: 'Babayo'),
-                HomeUserItem(imgUrl: 'assets/photo_2.png', username: 'Babayo'),
-                HomeUserItem(imgUrl: 'assets/photo_2.png', username: 'Ayayo'),
-                HomeUserItem(imgUrl: 'assets/photo_2.png', username: 'Cayayo'),
-                HomeUserItem(imgUrl: 'assets/photo_2.png', username: 'Dabayo'),
-                HomeUserItem(imgUrl: 'assets/photo_2.png', username: 'Babayo'),
-              ],
+          BlocProvider(
+            create: (context) => UserBloc()..add(UserGetRecents()),
+            child: BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                return state is UserSuccess
+                    ? SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: state.users.map((user) {
+                            return ZoomTapAnimation(
+                                onTap: () {
+                                  Get.toNamed(Routes.transferAmount,
+                                      arguments: TransferFormModel(
+                                          sendTo: user.username));
+                                },
+                                child: HomeUserItem(user: user));
+                          }).toList(),
+                        ),
+                      )
+                    : const Center(
+                        child: CircularProgressIndicator(),
+                      );
+              },
             ),
           )
         ],
@@ -387,27 +388,25 @@ class Homepage extends StatelessWidget {
           Container(
             width: double.infinity,
             alignment: Alignment.center,
-            child: const Wrap(
-              spacing: 17,
-              runSpacing: 18,
-              children: [
-                HomeTipsItem(
-                    imgUrl: 'assets/onboarding_1.png',
-                    title: 'Tips Menggandakan Uang',
-                    url: 'https://www.google.com'),
-                HomeTipsItem(
-                    imgUrl: 'assets/onboarding_2.png',
-                    title: 'Tips Dapat Uang',
-                    url: 'https://www.google.com'),
-                HomeTipsItem(
-                    imgUrl: 'assets/onboarding_1.png',
-                    title: 'Tips Menggandakan Uang',
-                    url: 'https://www.google.com'),
-                HomeTipsItem(
-                    imgUrl: 'assets/onboarding_2.png',
-                    title: 'Tips Dapat Uang',
-                    url: 'https://www.google.com')
-              ],
+            child: BlocProvider(
+              create: (context) => TipsBloc()..add(TipsGet()),
+              child: BlocBuilder<TipsBloc, TipsState>(
+                builder: (context, state) {
+                  return state is TipsSuccess
+                      ? Wrap(
+                          spacing: 17,
+                          runSpacing: 18,
+                          children: state.tips.map(
+                            (tip) {
+                              return HomeTipsItem(tip: tip);
+                            },
+                          ).toList(),
+                        )
+                      : const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                },
+              ),
             ),
           )
         ],
